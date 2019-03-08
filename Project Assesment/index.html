@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="vendors/css/Grid.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+        <script src="resources/js/script.js"></script>
+        <title> Hello world!</title>
+    </head>
+    <body>
+        <section class="section-form">
+            <div>
+                <h1>Registration form</h1>
+            </div>
+            <div class="row">
+                <form name="myform" id="myform" onsubmit="formValidation()" class="contact-form">
+                    <div class="row">
+                        <div class="col span-1-of-3 col1">
+                            <label for="firstname">First name</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <input type="text" name="firstname" id="firstname" placeholder="Your first name" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col span-1-of-3 col1">
+                            <label for="lastname">Last name</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <input type="text" name="lastname" id="lastname" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col span-1-of-3 col1">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <input type="email" name="email" id="email" placeholder="Your email" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col span-1-of-3 col1">
+                            <label for="gender">Gender</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <select name="gender" id="gender">
+                                <option value="chose" selected>Please Choose</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col span-1-of-3 col1">
+                            <label for="bday">Date of birth</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <input type="date" name="bday" id="bday">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col span-1-of-3">
+                            <label>&nbsp;</label>
+                        </div>
+                        <div class="col span-2-of-3">
+                            <button type="button" onclick="formValidation()">Submit your registration</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+
+</html>
