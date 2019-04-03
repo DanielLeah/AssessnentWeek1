@@ -25,13 +25,15 @@ var registrationController = (function(){
     };
 
     var trueSelection = function (inputtext) {
-        console.log(inputtext);
         if (inputtext == "choose") {
             return false;
         } else {
             return true;
         }
     };
+    
+    //var dataLocal = JSON.parse(localStorage.getItem("formInputs"));
+    
     
     return{
         getValidation: function(firstN,lastN,email,gender) {
@@ -42,6 +44,10 @@ var registrationController = (function(){
                 genderVal : trueSelection(gender)              
             }
         },
+        
+       /* getData: function(){   why not working?
+            return dataLocal;
+        }*/
         
   }  
     
@@ -70,7 +76,6 @@ var UIController = (function(){
     }
     
     var updateClasses = function (isVal, key) {
-        console.log(isVal + ' ' + key);
         if (isVal !== true){
             document.querySelector('.'+key).classList.remove('hidden');
             document.querySelector('.'+key).classList.add('invalid');
@@ -78,6 +83,14 @@ var UIController = (function(){
             document.querySelector('.'+key).classList.remove('hidden');
             document.querySelector('.'+key).classList.add('valid');
         }     
+    };
+    
+    var updateData = function (data){
+        document.getElementById(DOMStrings.firstname).value = data.firstName;
+        document.getElementById(DOMStrings.lastname).value = data.lastName;
+        document.getElementById(DOMStrings.email).value = data.email;
+        document.getElementById(DOMStrings.gender).value = data.gender;
+        document.getElementById(DOMStrings.bday).value = data.bday;
     };
     
     return {
@@ -104,6 +117,10 @@ var UIController = (function(){
         
         initClasses: function(){
             initClasses();
+        },
+        
+        updateData: function(data){
+            updateData(data);
         }
     }
 })();
@@ -111,8 +128,8 @@ var UIController = (function(){
 // Global App Controller
 
 var controller = (function(regisCtrl, UICtrl){
-    
-   
+     
+    var formInputs;
     var setupEventListeners = function() {
         var DOMStr = UICtrl.getDOMStrings();
         
@@ -140,17 +157,46 @@ var controller = (function(regisCtrl, UICtrl){
         });
         if (isValid){
             localStorage.setItem("formInputs",JSON.stringify(input));
+            console.log("if valid");
+            formInputs = JSON.parse(localStorage.getItem("formInputs"));
+            clearInputs();
         }else{
             console.log('not saved');
         }
         
     };
+    
+    function clearInputs(){
+        
+        
+        document.getElementById("firstname").value = "";
+        document.getElementById("lastname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("gender").value = "choose";
+        document.getElementById("bday").value = "";
+        UICtrl.initClasses();
+        console.log('before');
+        setTimeout(function(){
+            UICtrl.updateData(formInputs);
+        },1500);
+        
+        
+    }
+    
+   /* function clearLocal(){
+        localStorage.clear();
+    }*/
+    
     return {
         init: function() {
             console.log('Application has started.');
             UICtrl.initClasses();
             setupEventListeners();
-        }
+        },
+        
+       /* clearLocalInputs: function(){
+            clearLocal();
+        }*/
     };
     
 })(registrationController, UIController);
